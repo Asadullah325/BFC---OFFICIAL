@@ -14,5 +14,9 @@ export const getTags = async () => sample_tags;
 
 export const filterFoodsByTag = async (tagName) => {
     if (tagName === "All") return getFoods();
-    return sample_foods.filter((food) => food.tags?.includes(tagName));
+    return sample_foods
+        .filter((food) => food.tags?.includes(tagName));
 }
+
+export const getFoodsById = async (id) => sample_foods.find((food) => food.id === Number(id));
+
