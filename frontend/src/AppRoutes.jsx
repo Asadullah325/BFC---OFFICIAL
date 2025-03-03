@@ -7,6 +7,8 @@ const AppRoutes = () => {
     <>
     <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search/:searchTerm" element={<Home />} />
+        <Route path="/tag/:tagName" element={<Home />} />
     </Routes>
     </>
   )

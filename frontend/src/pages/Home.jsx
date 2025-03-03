@@ -1,13 +1,23 @@
 import React, { useEffect, useReducer } from "react";
-import { getFoods } from "../services/foodService";
+import {
+  getFoods,
+  getTags,
+  search,
+  filterFoodsByTag,
+} from "../services/foodService";
 import Thumbnail from "../components/Thumbnail";
+import { useParams } from "react-router-dom";
+import Search from "../components/Search";
+import Tags from "../components/Tags";
 
-const initialState = { foods: [] };
+const initialState = { foods: [], tags: [] };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_FOODS":
       return { ...state, foods: action.payload };
+    case "FETCH_TAGS":
+      return { ...state, tags: action.payload };
     default:
       return state;
   }
@@ -15,16 +25,35 @@ const reducer = (state, action) => {
 
 const Home = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { foods } = state;
+  const { foods, tags } = state;
+  const { searchTerm, tagName } = useParams();
 
   useEffect(() => {
-    getFoods().then((foods) =>
-      dispatch({ type: "FETCH_FOODS", payload: foods })
+    getTags().then((tags) =>
+      dispatch({
+        type: "FETCH_TAGS",
+        payload: tags,
+      })
     );
-  }, []);
+
+    const loadedFoods = tagName
+      ? filterFoodsByTag(tagName)
+      : searchTerm
+      ? search(searchTerm)
+      : getFoods();
+
+    loadedFoods.then((foods) =>
+      dispatch({
+        type: "FETCH_FOODS",
+        payload: foods,
+      })
+    );
+  }, [searchTerm , tagName]);
 
   return (
     <>
+      <Search />
+      <Tags tags={tags} />
       <Thumbnail foods={foods} />
     </>
   );
