@@ -13,7 +13,7 @@ const Tags = ({ tags , forFoodPage}) => {
           <Link
             key={tag.name}
             to={`/tag/${tag.name}`}
-            className="bg-[#C14600] text-white px-2 py-1 rounded-md"
+            className="bg-[#C14600] text-white px-2 py-1 rounded-md w-100 sm:w-auto"
           >
             {tag.name}
             {!forFoodPage && ` (${tag.count})`}

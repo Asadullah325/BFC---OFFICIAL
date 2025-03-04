@@ -9,6 +9,7 @@ import Thumbnail from "../components/Thumbnail";
 import { useParams } from "react-router-dom";
 import Search from "../components/Search";
 import Tags from "../components/Tags";
+import NotFound from "../components/NotFound";
 
 const initialState = { foods: [], tags: [] };
 
@@ -48,12 +49,15 @@ const Home = () => {
         payload: foods,
       })
     );
-  }, [searchTerm , tagName]);
+  }, [searchTerm, tagName]);
 
   return (
     <>
       <Search />
       <Tags tags={tags} />
+      {foods.length === 0 && (
+        <NotFound message="No foods found" linkRoute="/" linkText="Reset Search" />
+      )}
       <Thumbnail foods={foods} />
     </>
   );

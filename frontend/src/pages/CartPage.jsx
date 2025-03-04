@@ -3,6 +3,7 @@ import { useCart } from "../hooks/useCart";
 import Title from "../components/Title";
 import { Link } from "react-router-dom";
 import Price from "../components/Price";
+import NotFound from "../components/NotFound";
 
 const CartPage = () => {
   const { cart, removeFromCart, changeQuantity } = useCart();
@@ -72,7 +73,7 @@ const CartPage = () => {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center h-64">
-          <h2 className="text-2xl font-bold mb-4">Your Cart is Empty</h2>
+          <NotFound message="Cart is empty" linkRoute="/" linkText="Go Home" />
         </div>
       )}
     </>

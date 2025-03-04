@@ -7,6 +7,7 @@ import StarRatings from "../components/StarRatings";
 import Price from "../components/Price";
 import Tags from "../components/Tags";
 import { useCart } from "../hooks/useCart";
+import NotFound from "../components/NotFound";
 
 const FoodPage = () => {
   const [food, setfood] = useState({});
@@ -14,7 +15,7 @@ const FoodPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const {addToCart} = useCart();
+  const { addToCart } = useCart();
 
   const handleAddToCart = () => {
     addToCart(food);
@@ -33,7 +34,15 @@ const FoodPage = () => {
   return (
     <>
       <div>
-        {food?.name && (
+        {!food?.name ? (
+          <>
+            <NotFound
+              message="Food not found"
+              linkRoute="/"
+              linkText="Go to Home"
+            />
+          </>
+        ) : (
           <>
             <div className="flex justify-center items-start p-2 md:p-4 w-full h-screen">
               <div className="grid grid-cols-1 md:grid-cols-2 bg-amber-200 rounded-2xl w-screen  justify-start mb-10">
@@ -80,7 +89,10 @@ const FoodPage = () => {
                     <StarRatings stars={food.stars} />
                   </div>
                   <div className="flex items-center gap-2">
-                    <button className="bg-[#C14600] text-white py-2 px-4 rounded-md cursor-pointer w-full" onClick={handleAddToCart}>
+                    <button
+                      className="bg-[#C14600] text-white py-2 px-4 rounded-md cursor-pointer w-full"
+                      onClick={handleAddToCart}
+                    >
                       Add to Cart
                     </button>
                   </div>
