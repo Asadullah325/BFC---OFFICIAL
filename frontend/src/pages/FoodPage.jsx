@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getFoodsById } from "../services/foodService";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaClock, FaHeart } from "react-icons/fa";
 import StarRatings from "../components/StarRatings";
 import Price from "../components/Price";
 import Tags from "../components/Tags";
+import { useCart } from "../hooks/useCart";
 
 const FoodPage = () => {
   const [food, setfood] = useState({});
 
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const {addToCart} = useCart();
+
+  const handleAddToCart = () => {
+    addToCart(food);
+    navigate("/cart");
+  };
 
   useEffect(() => {
     getFoodsById(id)
@@ -71,7 +80,7 @@ const FoodPage = () => {
                     <StarRatings stars={food.stars} />
                   </div>
                   <div className="flex items-center gap-2">
-                    <button className="bg-[#C14600] text-white py-2 px-4 rounded-md cursor-pointer w-full">
+                    <button className="bg-[#C14600] text-white py-2 px-4 rounded-md cursor-pointer w-full" onClick={handleAddToCart}>
                       Add to Cart
                     </button>
                   </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../hooks/useCart";
 
 const Navbar = () => {
   const user = {
@@ -7,9 +8,7 @@ const Navbar = () => {
     email: "Y3u8w@example.com",
   };
 
-  const cart = {
-    count: 0,
-  };
+  const { cart } = useCart();
 
   const handleLogout = () => {};
 
@@ -39,7 +38,7 @@ const Navbar = () => {
                   <Link to="/cart" className="text-white hover:text-gray-300">
                     Cart{" "}
                     <span className="ml-1 text-sm bg-red-500 px-2 rounded-full p-1 hover:bg-red-600 text-white">
-                      {cart.count}
+                      {cart.items.length}
                     </span>
                   </Link>
                 </li>
