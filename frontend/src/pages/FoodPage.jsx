@@ -50,10 +50,10 @@ const FoodPage = () => {
                   <img
                     src={food.image}
                     alt={food.name}
-                    className=" mb-2 rounded-md shadow-md"
+                    className=" mb-2 rounded-md shadow-md w-[400px] h-[300px] self-start"
                   />
                 </div>
-                <div className="text-sm mb-2 flex flex-col gap-4 relative px-4 md:p-4 pb-10">
+                <div className="text-sm mb-2 flex flex-col gap-4 relative px-4 md:p-4 pb-10 w-full">
                   <div className="text-4xl font-bold mb-2">{food.name}</div>
                   <div className="flex items-center text-xl font-bold">
                     <FaClock className="mr-2 w-5 h-5" />

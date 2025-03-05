@@ -9,7 +9,7 @@ const Tags = ({ tags , forFoodPage}) => {
             justifyContent: forFoodPage ? "start" : "center"
         }
       }>
-        {tags.map((tag) => (
+        {tags?.map((tag) => (
           <Link
             key={tag.name}
             to={`/tag/${tag.name}`}
