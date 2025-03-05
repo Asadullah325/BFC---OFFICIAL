@@ -123,3 +123,22 @@ export const sample_tags = [
     { name: "Vegetarian", count: 1 },
     { name: "Spicy", count: 1 },
 ]
+
+export const sample_users = [
+    {
+        "id": 1,
+        "name": "John Doe",
+        "email": "HkY6M@example.com",
+        "password": "password123",
+        "address": "123 Main St, Anytown, USA",
+        "isAdmin": true,
+    },
+    {
+        "id": 2,
+        "name": "Jan jsd",
+        "email": "HkY6hfsakdsM@example.com",
+        "password": "password123",
+        "address": "6438 Main St, Anytown, USA",
+        "isAdmin": false,
+    }
+]

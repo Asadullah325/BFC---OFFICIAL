@@ -1,16 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
+import { useAuth } from "../hooks/useAuth";
 
 const Navbar = () => {
-  const user = {
-    name: "John Doe",
-    email: "Y3u8w@example.com",
-  };
+  const {user , logout} = useAuth()
 
   const { cart } = useCart();
 
-  const handleLogout = () => {};
 
   return (
     <>
@@ -44,7 +41,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <button
-                    onClick={handleLogout}
+                    onClick={logout}
                     className="text-white cursor-pointer hover:text-gray-300"
                   >
                     Logout
