@@ -19,7 +19,18 @@ export const login = async (email, password) => {
         localStorage.setItem("user", JSON.stringify(data));
         return data;
     } catch (error) {
-        console.log(error?.response?.data || "Login failed"); 
+        console.log(error?.response?.data || "Login failed");
+        throw error; // Re-throw for proper error handling in calling components
+    }
+};
+
+export const register = async (registerData) => {
+    try {
+        const { data } = await axios.post(`${API_BASE_URL}/register`, registerData);
+        localStorage.setItem("user", JSON.stringify(data));
+        return data;
+    } catch (error) {
+        console.log(error?.response?.data || "Registration failed");
         throw error; // Re-throw for proper error handling in calling components
     }
 };

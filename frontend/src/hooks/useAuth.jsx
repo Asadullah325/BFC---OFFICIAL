@@ -17,6 +17,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const registerUser = async (registerData) => {
+    try {
+      const user = await userService.register(registerData);
+      setUser(user);
+      toast.success("Registration successful!");
+    } catch (error) {
+      toast.error(error.response.data);
+    }
+  };
+
   const logout = () => {
     userService.logout();
     setUser(null);
@@ -25,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <>
-      <AuthContext.Provider value={{ user, login, logout }}>
+      <AuthContext.Provider value={{ user, login, logout, registerUser }}>
         {children}
       </AuthContext.Provider>
     </>

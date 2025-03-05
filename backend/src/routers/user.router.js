@@ -7,6 +7,8 @@ import bcrypt from "bcryptjs";
 
 
 const router = Router()
+const PASSWORD_SALT = 12;
+
 
 router.post("/login", handler(async (req, res) => {
     const { email, password } = req.body;
@@ -17,6 +19,30 @@ router.post("/login", handler(async (req, res) => {
         return
     }
     res.status(BAD_REQUEST).send("Invalid email or password")
+}))
+
+router.post("/register", handler(async (req, res) => {
+
+    const { name, email, password, address } = req.body
+
+    const userExists = await User.findOne({ email })
+
+    if (userExists) {
+        res.status(BAD_REQUEST).send("User already exists")
+        return
+    }
+
+    const encryptedPassword = await bcrypt.hash(password, PASSWORD_SALT)
+
+    const user = await User.create({
+        name,
+        email: email.toLowerCase(),
+        password: encryptedPassword,
+        address
+    })
+
+    res.send(generateToken(user))
+
 }))
 
 const generateToken = (user) => {

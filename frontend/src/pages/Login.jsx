@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import Title from "../components/Title";
 import Input from "../components/Input";
@@ -75,6 +75,16 @@ const Login = () => {
           title="Login"
           className="bg-amber-700 mt-1 p-1 px-10 rounded-md text-white font-semibold border-2 border-amber-700 cursor-pointer hover:bg-white hover:text-amber-700"
         />
+
+        <p className="mt-2 text-amber-700">
+          Don't have an account?{" "}
+          <Link
+            to={`/register${returnUrl ? `?returnUrl=${returnUrl}` : ""}`}
+            className="text-amber-700 font-bold hover:underline hover:text-amber-700"
+          >
+            Register
+          </Link>
+        </p>
       </form>
     </div>
   );

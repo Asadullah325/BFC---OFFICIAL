@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import FoodPage from './pages/FoodPage'
 import CartPage from './pages/CartPage'
 import Login from './pages/Login'
+import Register from './pages/Register'
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
         <Route path="/food/:id" element={<FoodPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
     </Routes>
     </>
   )

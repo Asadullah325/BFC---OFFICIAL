@@ -44,7 +44,7 @@ const Input = (
           onBlur={onBlur}
           ref={ref}
         />
-        {error && <p className="text-red-500">{getErrorMessage()}</p>}
+        {error && <p className="text-red-500 text-sm">{getErrorMessage()}</p>}
       </InputContainer>
     </>
   );
