@@ -8,7 +8,7 @@ export const sample_foods = [
         "origins": ["Italy"],
         "stars": 4.5,
         "image": "https://static01.nyt.com/images/2021/02/14/dining/carbonara-horizontal/carbonara-horizontal-videoSixteenByNineJumbo1600-v2.jpg",
-        "tags": ["Pasta", "Italian", "Cheese", "Egg", "Spicy", "Vegetarian", "Vegan"]
+        "tags": ["Vegetarian"]
     },
     {
         "id": 2,

@@ -1,35 +1,73 @@
 import { Router } from "express";
-import { sample_foods, sample_tags } from "../data.js";
+import Food from "../models/food.model.js";
+import handler from "express-async-handler";
+
 const router = Router();
 
-router.get("/", async (req, res) => {
-    res.json(sample_foods);
-});
+router.get("/", handler(
+    async (req, res) => {
+        const foods = await Food.find({});
+        res.json(foods);
+    }
+));
 
-router.get("/tags", async (req, res) => {
-    res.json(sample_tags);
-});
+router.get("/tags", handler(
+    async (req, res) => {
+        const tags = await Food.aggregate(
+            [
+                { $unwind: "$tags" },
+                {
+                    $group: {
+                        _id: "$tags",
+                        count: { $sum: 1 }
+                    }
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        name: "$_id",
+                        count: "$count"
+                    }
+                }
+            ]
+        ).sort({ count: -1 });
 
-router.get("/search/:searchTerm", async (req, res) => {
-    const { searchTerm } = req.params;
-    const foods = sample_foods.filter((food) =>
-        food.name
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase())
-    );
-    res.json(foods);
-});
+        const all = {
+            name: "All",
+            count: await Food.countDocuments()
+        };
 
-router.get("/tags/:tagName", async (req, res) => {
-    const { tagName } = req.params;
-    const foods = sample_foods.filter((food) => food.tags?.includes(tagName));
-    res.json(foods);
-});
+        tags.unshift(all);
 
-router.get("/:foodId", async (req, res) => {
-    const { foodId } = req.params;
-    const food = sample_foods.find((food) => food.id == foodId);
-    res.json(food);
-});
+        res.json(tags);
+    }
+));
+
+router.get("/search/:searchTerm", handler(
+    async (req, res) => {
+        const { searchTerm } = req.params;
+
+        const searchRegex = new RegExp(searchTerm, "i");
+
+        const foods = await Food.find({ name: { $regex: searchRegex } });
+        res.json(foods);
+    }
+));
+
+router.get("/tags/:tagName", handler(
+    async (req, res) => {
+        const { tagName } = req.params;
+        const foods = await Food.find({ tags: tagName });
+        res.json(foods);
+    }
+));
+
+router.get("/:foodId", handler(
+    async (req, res) => {
+        const { foodId } = req.params;
+        const food = await Food.findById(foodId);
+        res.json(food);
+    }
+));
 
 export default router;
