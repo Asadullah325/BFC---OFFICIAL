@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3000/api/foods"; 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const getFoods = async () => {
     try {
-        const { data } = await axios.get(`${API_BASE_URL}`);
+        const { data } = await axios.get(`${API_BASE_URL}/foods`);
         return data;
     } catch (error) {
         console.error("Error fetching foods:", error);
@@ -14,7 +14,7 @@ export const getFoods = async () => {
 
 export const search = async (searchTerm) => {
     try {
-        const { data } = await axios.get(`${API_BASE_URL}/search/${searchTerm}`);
+        const { data } = await axios.get(`${API_BASE_URL}/foods/search/${searchTerm}`);
         return data;
     } catch (error) {
         console.error(`Error searching for "${searchTerm}":`, error);
@@ -24,7 +24,7 @@ export const search = async (searchTerm) => {
 
 export const getTags = async () => {
     try {
-        const { data } = await axios.get(`${API_BASE_URL}/tags`);
+        const { data } = await axios.get(`${API_BASE_URL}/foods/tags`);
         return data;
     } catch (error) {
         console.error("Error fetching tags:", error);
@@ -37,7 +37,7 @@ export const filterFoodsByTag = async (tagName) => {
         return getFoods();
     }
     try {
-        const { data } = await axios.get(`${API_BASE_URL}/tags/${tagName}`);
+        const { data } = await axios.get(`${API_BASE_URL}/foods/tags/${tagName}`);
         return data;
     } catch (error) {
         console.error(`Error filtering foods by tag "${tagName}":`, error);
@@ -47,7 +47,7 @@ export const filterFoodsByTag = async (tagName) => {
 
 export const getFoodsById = async (id) => {
     try {
-        const { data } = await axios.get(`${API_BASE_URL}/${id}`);
+        const { data } = await axios.get(`${API_BASE_URL}/foods/${id}`);
         return data;
     } catch (error) {
         console.error(`Error fetching food by ID "${id}":`, error);

@@ -5,9 +5,11 @@ import Food from "./food.model.js"; // Import the Food model
 
 export const orderItemSchema = new Schema(
     {
-        productId: { type: mongoose.Schema.Types.ObjectId, ref: "Food", required: true },
+        id: { type: mongoose.Schema.Types.ObjectId, ref: "Food", required: true },
         price: { type: Number, required: true },
         quantity: { type: Number, required: true },
+        name: { type: String, required: true },
+        image: { type: String, required: true }
     },
     { _id: false }
 );

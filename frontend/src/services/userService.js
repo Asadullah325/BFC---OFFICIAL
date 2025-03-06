@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:3000/api/users";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 export const getUser = () => {
     try {
@@ -15,7 +16,7 @@ export const getUser = () => {
 
 export const login = async (email, password) => {
     try {
-        const { data } = await axios.post(`${API_BASE_URL}/login`, { email, password });
+        const { data } = await axios.post(`${API_BASE_URL}/users/login`, { email, password });
         localStorage.setItem("user", JSON.stringify(data));
         return data;
     } catch (error) {
@@ -26,7 +27,7 @@ export const login = async (email, password) => {
 
 export const register = async (registerData) => {
     try {
-        const { data } = await axios.post(`${API_BASE_URL}/register`, registerData);
+        const { data } = await axios.post(`${API_BASE_URL}/users/register`, registerData);
         localStorage.setItem("user", JSON.stringify(data));
         return data;
     } catch (error) {

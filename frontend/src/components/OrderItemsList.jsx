@@ -13,7 +13,7 @@ const OrderItemsList = ({ order }) => {
             </td>
           </tr>
           {order?.items.map((item , index) => (
-            <tr key={index} className="w-full flex justify-between items-center sm:items-start md:items-center flex-col md:flex-row py-2">
+            <tr key={index} className="w-full flex justify-between items-center sm:items-start md:items-center flex-col sm:flex-row py-2">
               <td>
                 <Link to={`/food/${item.id}`}>
                   <img src={item.image} alt={item.name} className="w-16 h-16 rounded-full" />
@@ -25,7 +25,7 @@ const OrderItemsList = ({ order }) => {
               <td>
                 <Price price={item.price} />
               </td>
-              <td>{item.quantity}</td>
+              <td className="text-sm font-bold">{item.quantity}</td>
             </tr>
           ))}
           <tr className="w-full flex justify-between items-center sm:items-start md:items-center py-2">

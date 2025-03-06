@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AuthRoute from "./components/AuthRoute";
 import Checkout from "./pages/Checkout";
+import PaymentPage from "./pages/PaymentPage";
 
 const AppRoutes = () => {
   return (
@@ -24,6 +25,14 @@ const AppRoutes = () => {
           element={
             <AuthRoute>
               <Checkout />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            <AuthRoute>
+              <PaymentPage />
             </AuthRoute>
           }
         />
