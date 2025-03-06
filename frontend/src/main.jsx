@@ -8,6 +8,7 @@ import { AuthProvider } from "./hooks/useAuth.jsx";
 import { LoadingProvider } from "./hooks/useLoader.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./Interceptors/authInterceptor";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

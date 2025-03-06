@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import foodRouter from "./routers/food.router.js";
 import userRouter from "./routers/user.router.js";
+import orderRouter from "./routers/order.router.js";
 import { connectDB } from "./config/database.config.js";
 
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/foods", foodRouter);
 app.use("/api/users", userRouter);
+app.use("/api/orders", orderRouter);
 
 const PORT = process.env.PORT || 5000;
 
